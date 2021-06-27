@@ -160,6 +160,102 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-时间序列统计分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/24/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">时间序列统计分析</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/24/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2021-05-24T13:43:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="平稳性检验"><a href="#平稳性检验" class="headerlink" title="平稳性检验"></a>平稳性检验</h1><p><strong>平稳性是时间序列分析的基础。</strong></p>
+<p>通俗的理解平稳性，指直观上看当数据没有明显的模式特征的话（趋势性、季节性），我们认为它是平稳的。定义上“平稳”指固定时间和位置的概率分布与所有时间和位置的概率分布相同的随机过程。其数学期望和方差这些参数也不随时间和位置变化。</p>
+<p>在数学上，时间序列的严平稳有着更精确的定义：它要求时间序列中任意给定长度的两段子序列都满足相同的联合分布。这是一个很强的条件，在实际中几乎不可能被满足。因此我们还有弱平稳的定义，它要求时间序列满足均值平稳性和二阶平稳性。</p>
+<p>如果一个时间序列满足以下两个条件，则它是弱平稳的：</p>
+<ul>
+<li>对于所有的时刻t,有$E[v_t]=\mu$，其中$\mu$是一个常数</li>
+<li>对于所有的时刻t和任意的间隔k，值之间的协方差$\sigma(v_t,v_{t-k})=\gamma_k$，其中$\gamma_k$与时间t无关，它仅仅依赖于间隔k。这称为方差平稳性。</li>
+</ul>
+<p><strong>弱平稳假设对于分析时间序列至关重要。</strong></p>
+<p>为了解释这一点，来看一个例子。假设我们想知道某天股票收益率的均值是多少，假设股票变化时序是平稳的，我们就可以通过过去的数据预估出未来一段时间的收益均值。不幸的是，历史只发生一次，时间也一去不复返。大部分股市时序是不符合平稳性假设的。因此这个方法对于金融数据是行不通的。</p>
+<p>然而，在一般弱平稳的假设下，我们也可以通常假定投资品收益率序列是弱平稳的。只要有足够多的历史数据，这个假定可以用实证方法验证。比如，我们可以把数据分成若干个子集，并分别计算每个子集的统计量，然后通过统计的手段检验这些来自不同子集的统计量的一致性。对于此，更复杂的非线性模型对波动率建模（比如 GARCH），又或者把时间段细分为更短的区间，使得在每个小区间内的时间序列尽量满足弱平稳性，是常见且通用的时间序列分析方法。</p>
+<p>有了上一节和本节的内容做铺垫，下面我们聊聊时间序列的自相关性。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">时间序列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/时间序列//" class="article-tag-list-link color5">时间序列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/24/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-java容器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -750,6 +846,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">时间序列</a>
               </li>
             
             <div class="clearfix"></div>
