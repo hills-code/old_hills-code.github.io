@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://hills-code.github.io">
   <title>时间序列统计分析 | Hill&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平稳性检验平稳性是时间序列分析的基础。 通俗的理解平稳性，指直观上看当数据没有明显的模式特征的话（趋势性、季节性），我们认为它是平稳的。定义上“平稳”指固定时间和位置的概率分布与所有时间和位置的概率分布相同的随机过程。其数学期望和方差这些参数也不随时间和位置变化。 在数学上，时间序列的严平稳有着更精确的定义：它要求时间序列中任意给定长度的两段子序列都满足相同的联合分布。这是一个很强的条件，在实际中">
+  <meta name="description" content="平稳性检验平稳性是时间序列分析的基础。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="时间序列统计分析">
 <meta property="og:url" content="https://hills-code.github.io/2021/05/24/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="Hill&#39;s blog">
-<meta property="og:description" content="平稳性检验平稳性是时间序列分析的基础。 通俗的理解平稳性，指直观上看当数据没有明显的模式特征的话（趋势性、季节性），我们认为它是平稳的。定义上“平稳”指固定时间和位置的概率分布与所有时间和位置的概率分布相同的随机过程。其数学期望和方差这些参数也不随时间和位置变化。 在数学上，时间序列的严平稳有着更精确的定义：它要求时间序列中任意给定长度的两段子序列都满足相同的联合分布。这是一个很强的条件，在实际中">
+<meta property="og:description" content="平稳性检验平稳性是时间序列分析的基础。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-24T13:43:41.000Z">
-<meta property="article:modified_time" content="2021-06-27T06:32:19.092Z">
+<meta property="article:modified_time" content="2021-06-27T06:34:17.553Z">
 <meta property="article:author" content="hill">
 <meta property="article:tag" content="时间序列">
 <meta name="twitter:card" content="summary">
@@ -184,6 +184,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="平稳性检验"><a href="#平稳性检验" class="headerlink" title="平稳性检验"></a>平稳性检验</h1><p><strong>平稳性是时间序列分析的基础。</strong></p>
+<span id="more"></span>
 <p>通俗的理解平稳性，指直观上看当数据没有明显的模式特征的话（趋势性、季节性），我们认为它是平稳的。定义上“平稳”指固定时间和位置的概率分布与所有时间和位置的概率分布相同的随机过程。其数学期望和方差这些参数也不随时间和位置变化。</p>
 <p>在数学上，时间序列的严平稳有着更精确的定义：它要求时间序列中任意给定长度的两段子序列都满足相同的联合分布。这是一个很强的条件，在实际中几乎不可能被满足。因此我们还有弱平稳的定义，它要求时间序列满足均值平稳性和二阶平稳性。</p>
 <p>如果一个时间序列满足以下两个条件，则它是弱平稳的：</p>
