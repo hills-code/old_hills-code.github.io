@@ -18,10 +18,10 @@
 <meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-04-22-52-42.png">
 <meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-04-22-57-51.png">
 <meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-04-23-07-04.png">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5336514-d05e8edc42eb1469.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/512/format/webp">
+<meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-05-22-09-12.png">
 <meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-05-00-30-56.png">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5336514-dc3ac9dd64968b59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/231/format/webp">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5336514-2941b3300988ffe9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/314/format/webp">
+<meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-05-22-09-29.png">
+<meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-05-22-09-39.png">
 <meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-04-23-27-57.png">
 <meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-04-23-56-27.png">
 <meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/!%5B%5D(2021-07-05-00-35-17.png).png">
@@ -29,9 +29,9 @@
 <meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-05-00-41-42.png">
 <meta property="og:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-05-00-46-40.png">
 <meta property="article:published_time" content="2021-07-04T14:43:23.000Z">
-<meta property="article:modified_time" content="2021-07-04T16:48:27.314Z">
+<meta property="article:modified_time" content="2021-07-05T14:09:41.400Z">
 <meta property="article:author" content="hill">
-<meta property="article:tag" content="软件构造">
+<meta property="article:tag" content="建模">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hills-code.github.io/2021/07/04/UML%E7%B1%BB%E5%9B%BE/2021-07-04-22-52-42.png">
   
@@ -222,7 +222,7 @@
 <li>斜体表示抽象  </li>
 </ul>
 <p>回顾上一章的例子，此时我们可以说我们完全看懂了一个类/接口的类图了，属性、方法名前面的+和-号代表的就是它们的访问权限。接下来我将展实一个更一般的例子说明上面的这些访问修饰符。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5336514-d05e8edc42eb1469.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/512/format/webp"></p>
+<p><img src="2021-07-05-22-09-12.png"></p>
 <p>在这张图中我们可以看到类名是斜体，这意味着这是一个抽象类。</p>
 <p>看完了类名之后我们研究一下这个接口的属性，可以看到name是public，age是private，weight是protected，height是default，sex是public同时也是static的</p>
 <p>方法的分析方法与属性是类似的在此就不赘述了。</p>
@@ -239,8 +239,8 @@
 <p><img src="2021-07-05-00-30-56.png"><br><em>StarUML中集中关系的选项</em></p>
 <p>接下来我将逐一进行分析</p>
 <h2 id="泛化与实现（继承关系）"><a href="#泛化与实现（继承关系）" class="headerlink" title="泛化与实现（继承关系）"></a>泛化与实现（继承关系）</h2><p>【概念】：泛化和实现的概念其实有点相似。泛化其实就是一个继承关系，它可以发生在类与类，接口与接口之间。实现则和java中说类实现接口的实现是一个意思，它就发生在类与接口之间。</p>
-<p>【泛化表示方式】：带三角箭头的实线，箭头指向父类<br><img src="https://upload-images.jianshu.io/upload_images/5336514-dc3ac9dd64968b59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/231/format/webp"><br><em>鸟类继承动物这个抽象类</em></p>
-<p>【实现表示方式】：带三角箭头的虚线，箭头指向接口<br><img src="https://upload-images.jianshu.io/upload_images/5336514-2941b3300988ffe9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/314/format/webp"><br><em>大雁类实现飞翔接口</em></p>
+<p>【泛化表示方式】：带三角箭头的实线，箭头指向父类<br><img src="2021-07-05-22-09-29.png"><br><em>鸟类继承动物这个抽象类</em></p>
+<p>【实现表示方式】：带三角箭头的虚线，箭头指向接口<br><img src="2021-07-05-22-09-39.png"><br><em>大雁类实现飞翔接口</em></p>
 <p><strong>很多时候我们会注意到在UML类图中用泛化的表示方式来表示实现</strong>。在PPT中Quack等Quackable的实现类均使用泛化的表示方法（带三角箭头的实现）来体现实现关系，严格来说这是不严谨的。应该使用带三角箭头的虚线来表现实现关系。</p>
 <p><img src="2021-07-04-23-27-57.png"></p>
 <h2 id="委派关系"><a href="#委派关系" class="headerlink" title="委派关系"></a>委派关系</h2><p>委派有多种类型</p>
@@ -319,7 +319,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件构造</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">建模</a>
         		</li>
       		
 		</ul>
@@ -582,7 +582,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件构造</a>
+                <a href="javascript:void(0)" class="js-tag color3">建模</a>
               </li>
             
             <div class="clearfix"></div>
