@@ -8,13 +8,22 @@
   <link rel="dns-prefetch" href="https://hills-code.github.io">
   <title>深度学习基础知识 | Hill&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="dilated convolution直观来讲，Dilated Convolutions就是为了获得大的感受野。 插播一句：何谓感受野？ 感受野范围内的任意元素变化都会影响到输出。 下图很直观的介绍了什么是 Dilated Convolutions 以及 感受野。  (a) 原始的 3×3卷积，1-dilated，感受野为 3×3； (b) 在(a)的基础上进行 3×3卷积，2-dilated，感">
+  <meta name="description" content="权重衰减（weight decay）与学习率衰减（learning rate decay）1. 权重衰减（weight decay）L2正则化的目的就是为了让权重衰减到更小的值，在一定程度上减少模型过拟合的问题，所以权重衰减也叫L2正则化。 1.1 L2正则化与权重衰减系数L2正则化就是在代价函数后面再加上一个正则化项： 其中C0代表原始的代价函数，后面那一项就是L2正则化项，它是这样来的：所有参">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习基础知识">
 <meta property="og:url" content="https://hills-code.github.io/2021/08/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="Hill&#39;s blog">
-<meta property="og:description" content="dilated convolution直观来讲，Dilated Convolutions就是为了获得大的感受野。 插播一句：何谓感受野？ 感受野范围内的任意元素变化都会影响到输出。 下图很直观的介绍了什么是 Dilated Convolutions 以及 感受野。  (a) 原始的 3×3卷积，1-dilated，感受野为 3×3； (b) 在(a)的基础上进行 3×3卷积，2-dilated，感">
+<meta property="og:description" content="权重衰减（weight decay）与学习率衰减（learning rate decay）1. 权重衰减（weight decay）L2正则化的目的就是为了让权重衰减到更小的值，在一定程度上减少模型过拟合的问题，所以权重衰减也叫L2正则化。 1.1 L2正则化与权重衰减系数L2正则化就是在代价函数后面再加上一个正则化项： 其中C0代表原始的代价函数，后面那一项就是L2正则化项，它是这样来的：所有参">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdn.net/20180630161015526?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/2018063016132630?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180630161350343?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180630161538529?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180630161545925?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/2018063016182747?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502093404478.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5ODUyNjc2,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502093551295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5ODUyNjc2,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502093606306.png">
 <meta property="og:image" content="https://img-blog.csdn.net/20170410142647837?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2h1emZhbg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="https://github.com/vdumoulin/conv_arithmetic/raw/master/gif/padding_strides.gif">
 <meta property="og:image" content="https://github.com/vdumoulin/conv_arithmetic/raw/master/gif/dilation.gif">
@@ -27,11 +36,11 @@
 <meta property="og:image" content="https://img-blog.csdn.net/20180619190404367?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 <meta property="og:image" content="https://img-blog.csdn.net/20180503231727530?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3R5aGpfc2Y=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 <meta property="article:published_time" content="2021-08-11T12:29:39.000Z">
-<meta property="article:modified_time" content="2021-08-21T08:20:38.786Z">
+<meta property="article:modified_time" content="2021-08-22T08:27:26.481Z">
 <meta property="article:author" content="hill">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20170410142647837?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2h1emZhbg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180630161015526?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
   
     <link rel="alternative" href="/atom.xml" title="Hill&#39;s blog" type="application/atom+xml">
   
@@ -195,7 +204,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="dilated-convolution"><a href="#dilated-convolution" class="headerlink" title="dilated convolution"></a>dilated convolution</h1><p>直观来讲，Dilated Convolutions就是为了获得大的感受野。</p>
+        <h1 id="权重衰减（weight-decay）与学习率衰减（learning-rate-decay）"><a href="#权重衰减（weight-decay）与学习率衰减（learning-rate-decay）" class="headerlink" title="权重衰减（weight decay）与学习率衰减（learning rate decay）"></a>权重衰减（weight decay）与学习率衰减（learning rate decay）</h1><h2 id="1-权重衰减（weight-decay）"><a href="#1-权重衰减（weight-decay）" class="headerlink" title="1. 权重衰减（weight decay）"></a>1. 权重衰减（weight decay）</h2><p>L2正则化的目的就是为了让权重衰减到更小的值，在一定程度上减少模型过拟合的问题，所以权重衰减也叫L2正则化。</p>
+<h3 id="1-1-L2正则化与权重衰减系数"><a href="#1-1-L2正则化与权重衰减系数" class="headerlink" title="1.1 L2正则化与权重衰减系数"></a>1.1 L2正则化与权重衰减系数</h3><p>L2正则化就是在代价函数后面再加上一个正则化项：<br><img src="https://img-blog.csdn.net/20180630161015526?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"></p>
+<p>其中C0代表原始的代价函数，后面那一项就是L2正则化项，它是这样来的：所有参数w的平方的和，除以训练集的样本大小n。λ就是正则项系数，权衡正则项与C0项的比重。另外还有一个系数1/2，1/2 1/211经常会看到，主要是为了后面求导的结果方便，后面那一项求导会产生一个2，与1/2相乘刚好凑整为1。系数λ就是权重衰减系数。</p>
+<h3 id="1-2-为什么可以对权重进行衰减"><a href="#1-2-为什么可以对权重进行衰减" class="headerlink" title="1.2 为什么可以对权重进行衰减"></a>1.2 为什么可以对权重进行衰减</h3><p>我们对加入L2正则化后的代价函数进行推导，先求导：</p>
+<p><img src="https://img-blog.csdn.net/2018063016132630?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"></p>
+<p>可以发现L2正则化项对b的更新没有影响，但是对于w的更新有影响：</p>
+<p><img src="https://img-blog.csdn.net/20180630161350343?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"></p>
+<p>在不使用L2正则化时，求导结果中w前系数为1，现在w前面系数为1-ηλ/n，因为η、λ、n都是正的，所以1-ηλ/n小于1，它的效果是减小w，这也就是权重衰减（weight decay）的由来。当然考虑到后面的导数项，w最终的值可能增大也可能减小。</p>
+<p><img src="https://img-blog.csdn.net/20180630161538529?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"><br><img src="https://img-blog.csdn.net/20180630161545925?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"></p>
+<p>另外，需要提一下，对于基于mini-batch的随机梯度下降，w和b更新的公式跟上面给出的有点不同：</p>
+<p>对比上面w的更新公式，可以发现后面那一项变了，变成所有导数加和，乘以η再除以m，m是一个mini-batch中样本的个数。</p>
+<h3 id="1-3-权重衰减（L2正则化）的作用"><a href="#1-3-权重衰减（L2正则化）的作用" class="headerlink" title="1.3 权重衰减（L2正则化）的作用"></a>1.3 权重衰减（L2正则化）的作用</h3><p><strong>作用</strong>： 权重衰减（L2正则化）可以避免模型过拟合问题。</p>
+<p><strong>思考</strong>： L2正则化项有让w变小的效果，但是为什么w变小可以防止过拟合呢？</p>
+<p><strong>原理</strong>： </p>
+<ol>
+<li>从模型的复杂度上解释：更小的权值w，从某种意义上说，表示网络的复杂度更低，对数据的拟合更好（这个法则也叫做奥卡姆剃刀），而在实际应用中，也验证了这一点，L2正则化的效果往往好于未经正则化的效果。</li>
+<li>从数学方面的解释：过拟合的时候，拟合函数的系数往往非常大，为什么？如下图所示，过拟合，就是拟合函数需要顾忌每一个点，最终形成的拟合函数波动很大。在某些很小的区间里，函数值的变化很剧烈。这就意味着函数在某些小区间里的导数值（绝对值）非常大，由于自变量值可大可小，所以只有系数足够大，才能保证导数值很大。而正则化是通过约束参数的范数使其不要太大，所以可以在一定程度上减少过拟合情况。</li>
+</ol>
+<h2 id="学习率衰减（learning-rate-decay）"><a href="#学习率衰减（learning-rate-decay）" class="headerlink" title="学习率衰减（learning rate decay）"></a>学习率衰减（learning rate decay）</h2><p>在训练模型的时候，通常会遇到这种情况：我们平衡模型的训练速度和损失（loss）后选择了相对合适的学习率（learning rate），但是训练集的损失下降到一定的程度后就不在下降了，比如training loss一直在0.7和0.9之间来回震荡，不能进一步下降。如下图所示：</p>
+<p><img src="https://img-blog.csdn.net/2018063016182747?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2dyYW1fZGV2ZWxvcGVy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"></p>
+<p>遇到这种情况通常可以通过适当降低学习率（learning rate）来实现。但是，降低学习率又会延长训练所需的时间。<br>学习率衰减（learning rate decay） 就是一种可以平衡这两者之间矛盾的解决方案。学习率衰减的基本思想是：学习率随着训练的进行逐渐衰减。<br>学习率衰减基本有两种实现方法：</p>
+<ul>
+<li>线性衰减。例如：每过5个epochs学习率减半。</li>
+<li>指数衰减。例如：随着迭代轮数的增加学习率自动发生衰减，每过5个epochs将学习率乘以0.9998。具体算法如下：</li>
+</ul>
+<p>decayed_learning_rate=learning_rate*decay_rate^(global_step/decay_steps)<br>其中decayed_learning_rate为每一轮优化时使用的学习率，learning_rate为事先设定的初始学习率，decay_rate为衰减系数，decay_steps为衰减速度。</p>
+<h1 id="残差连接（skip-connect）-（residual-connections）"><a href="#残差连接（skip-connect）-（residual-connections）" class="headerlink" title="残差连接（skip connect）/（residual connections）"></a>残差连接（skip connect）/（residual connections）</h1><p>想必做深度学习的都知道skip connect，也就是残差连接，那什么是skip connect呢？如下图<br><img src="https://img-blog.csdnimg.cn/20200502093404478.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5ODUyNjc2,size_16,color_FFFFFF,t_70"></p>
+<p>上面是来自于resnet【1】的skip block的示意图。我们可以使用一个非线性变化函数来描述一个网络的输入输出，即输入为X，输出为F(x)，F通常包括了卷积，激活等操作。</p>
+<p>当我们强行将一个输入添加到函数的输出的时候，虽然我们仍然可以用G(x)来描述输入输出的关系，但是这个G(x)却可以明确的拆分为F(x)和X的线性叠加。</p>
+<p>这就是skip connect的思想，将输出表述为输入和输入的一个非线性变换的线性叠加，没用新的公式，没有新的理论，只是换了一种新的表达。</p>
+<p>它解决了深层网络的训练问题，作者的原论文中达到了上千层。</p>
+<p>残差连接是何的首创吗？当然不是，传统的神经网络中早就有这个概念，文【2】中则明确提出了残差的结构，这是来自于LSTM的控制门的思想。<br>$$y = H(x,WH) + X，此所谓残差连接，skip-connection。$$</p>
+<p>那为什么要这么做呢？首先大家已经形成了一个通识，在一定程度上，网络越深表达能力越强，性能越好。</p>
+<p>不过，好是好了，随着网络深度的增加，带来了许多问题，梯度消散，梯度爆炸；在resnet出来之前大家没想办法去解决吗？当然不是。更好的优化方法，更好的初始化策略，BN层，Relu等各种激活函数，都被用过了，但是仍然不够，改善问题的能力有限，直到残差连接被广泛使用。</p>
+<p>大家都知道深度学习依靠误差的链式反向传播来进行参数更新，假如我们有这样一个函数：<br><img src="https://img-blog.csdnimg.cn/20200502093551295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5ODUyNjc2,size_16,color_FFFFFF,t_70"></p>
+<p>其中的f，g，k大家可以自行脑补为卷积，激活，分类器。<br>cost对f的导数为：<br><img src="https://img-blog.csdnimg.cn/20200502093606306.png"></p>
+<p>它有隐患，一旦其中某一个导数很小，多次连乘后梯度可能越来越小，这就是常说的梯度消散，对于深层网络，传到浅层几乎就没了。但是如果使用了残差，每一个导数就加上了一个恒等项1，$dh/dx=d(f+x)/dx=1+df/dx$。此时就算原来的导数df/dx很小，这时候误差仍然能够有效的反向传播，这就是核心思想。</p>
+<p>有这样的一个输入输出关系：</p>
+<h1 id="dilated-convolution"><a href="#dilated-convolution" class="headerlink" title="dilated convolution"></a>dilated convolution</h1><p>直观来讲，Dilated Convolutions就是为了获得大的感受野。</p>
 <p>插播一句：何谓感受野？ 感受野范围内的任意元素变化都会影响到输出。</p>
 <p>下图很直观的介绍了什么是 Dilated Convolutions 以及 感受野。<br><img src="https://img-blog.csdn.net/20170410142647837?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2h1emZhbg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
 <ul>
@@ -424,7 +471,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#dilated-convolution"><span class="toc-number">1.</span> <span class="toc-text">dilated convolution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dropout"><span class="toc-number">2.</span> <span class="toc-text">dropout</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Dropout%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">1. Dropout简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Dropout%E5%87%BA%E7%8E%B0%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.1 Dropout出现的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%BB%80%E4%B9%88%E6%98%AFDropout"><span class="toc-number">2.1.2.</span> <span class="toc-text">1.2 什么是Dropout</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Dropout%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%8F%8A%E4%BD%BF%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">2. Dropout工作流程及使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Dropout%E5%85%B7%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1 Dropout具体工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dropout%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.2.2.</span> <span class="toc-text">Dropout在神经网络中的使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4Dropout%E5%8F%AF%E4%BB%A5%E8%A7%A3%E5%86%B3%E8%BF%87%E6%8B%9F%E5%90%88%EF%BC%9F"><span class="toc-number">2.3.</span> <span class="toc-text">3. 为什么说Dropout可以解决过拟合？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-pytorch%E4%B8%AD%E7%9A%84Dropout"><span class="toc-number">2.4.</span> <span class="toc-text">4.pytorch中的Dropout</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">一些激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ReLU"><span class="toc-number">3.1.</span> <span class="toc-text">ReLU</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Softmax"><span class="toc-number">3.2.</span> <span class="toc-text">Softmax</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F%EF%BC%88weight-decay%EF%BC%89%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%A1%B0%E5%87%8F%EF%BC%88learning-rate-decay%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">权重衰减（weight decay）与学习率衰减（learning rate decay）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F%EF%BC%88weight-decay%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">1. 权重衰减（weight decay）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-L2%E6%AD%A3%E5%88%99%E5%8C%96%E4%B8%8E%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F%E7%B3%BB%E6%95%B0"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 L2正则化与权重衰减系数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E5%AF%B9%E6%9D%83%E9%87%8D%E8%BF%9B%E8%A1%8C%E8%A1%B0%E5%87%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 为什么可以对权重进行衰减</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F%EF%BC%88L2%E6%AD%A3%E5%88%99%E5%8C%96%EF%BC%89%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 权重衰减（L2正则化）的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%A1%B0%E5%87%8F%EF%BC%88learning-rate-decay%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">学习率衰减（learning rate decay）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AE%8B%E5%B7%AE%E8%BF%9E%E6%8E%A5%EF%BC%88skip-connect%EF%BC%89-%EF%BC%88residual-connections%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">残差连接（skip connect）&#x2F;（residual connections）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dilated-convolution"><span class="toc-number">3.</span> <span class="toc-text">dilated convolution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dropout"><span class="toc-number">4.</span> <span class="toc-text">dropout</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Dropout%E7%AE%80%E4%BB%8B"><span class="toc-number">4.1.</span> <span class="toc-text">1. Dropout简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Dropout%E5%87%BA%E7%8E%B0%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">4.1.1.</span> <span class="toc-text">1.1 Dropout出现的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%BB%80%E4%B9%88%E6%98%AFDropout"><span class="toc-number">4.1.2.</span> <span class="toc-text">1.2 什么是Dropout</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Dropout%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%8F%8A%E4%BD%BF%E7%94%A8"><span class="toc-number">4.2.</span> <span class="toc-text">2. Dropout工作流程及使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Dropout%E5%85%B7%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">4.2.1.</span> <span class="toc-text">2.1 Dropout具体工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dropout%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">4.2.2.</span> <span class="toc-text">Dropout在神经网络中的使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4Dropout%E5%8F%AF%E4%BB%A5%E8%A7%A3%E5%86%B3%E8%BF%87%E6%8B%9F%E5%90%88%EF%BC%9F"><span class="toc-number">4.3.</span> <span class="toc-text">3. 为什么说Dropout可以解决过拟合？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-pytorch%E4%B8%AD%E7%9A%84Dropout"><span class="toc-number">4.4.</span> <span class="toc-text">4.pytorch中的Dropout</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">一些激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ReLU"><span class="toc-number">5.1.</span> <span class="toc-text">ReLU</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Softmax"><span class="toc-number">5.2.</span> <span class="toc-text">Softmax</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -573,6 +620,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
@@ -581,15 +636,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CSAPP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color5">数学建模</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">CSAPP</a>
               </li>
             
             <div class="clearfix"></div>
